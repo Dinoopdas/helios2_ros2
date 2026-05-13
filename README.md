@@ -77,11 +77,7 @@ In RViz:
 - ✅ Coord3D_ABCY16 decode → PointCloud2
 - ✅ Intensity image publishing
 - ✅ ~30 Hz steady-state streaming
-- ✅ Persistent network configuration
-- 🟡 Crash recovery on cable disconnect (in progress)
 - 🔴 URDF / camera mount frame
-- 🔴 Extrinsic calibration with Motoman HC10
-- 🔴 Hand-eye calibration (if camera moves with arm)
 - 🔴 Point cloud filtering / downsampling
 
 ---
