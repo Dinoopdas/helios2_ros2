@@ -48,4 +48,19 @@ install(DIRECTORY config
   DESTINATION share/${PROJECT_NAME}/
 )
 
+# -------- Probe tool --------
+add_executable(helios2_probe src/helios2_probe.cpp)
+target_include_directories(helios2_probe PRIVATE
+  ${arena_sdk_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
+)
+ament_target_dependencies(helios2_probe rclcpp arena_sdk)
+target_link_libraries(helios2_probe
+  ${arena_sdk_LIBRARIES}
+  ${OpenCV_LIBS}
+  opencv_calib3d
+)
+install(TARGETS helios2_probe DESTINATION lib/${PROJECT_NAME})
+
 ament_package()
+
