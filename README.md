@@ -21,7 +21,7 @@ If you already have ROS 2 Humble and the Arena SDK installed:
 ```bash
 # 1. Clone into your workspace
 cd ~/cobot_ws/src
-git clone https://github.com/YOUR_USER/helios2_ros2.git
+git clone https://github.com/Dinoopdas/helios2_ros2.git
 cd helios2_ros2
 
 # 2. Set up the camera network (see SETUP.md for details)
