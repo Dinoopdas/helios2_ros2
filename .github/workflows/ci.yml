@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Arena SDK is proprietary to LUCID and cannot be installed on GitHub-hosted
+# runners, so we cannot run `colcon build` here. This workflow validates the
+# things that don't require the SDK: package.xml well-formedness, launch file
+# Python syntax, and C++ lint (informational). For a real build, point a
+# self-hosted runner that has Arena SDK installed at this workflow.
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    container:
+      image: ros:humble-ros-base
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lint tools
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            ros-humble-ament-cpplint \
+            libxml2-utils \
+            python3
+
+      - name: Validate package.xml is well-formed
+        run: xmllint --noout helios2_node/package.xml
+
+      - name: Python launch syntax check
+        run: python3 -m py_compile helios2_node/launch/helios2.launch.py
+
+      - name: ament_cpplint (informational)
+        run: |
+          . /opt/ros/humble/setup.sh
+          ament_cpplint helios2_node/src/*.cpp || true
